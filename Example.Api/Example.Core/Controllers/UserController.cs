@@ -1,5 +1,5 @@
-using Example.Core.Dtos;
 using Example.Core.Services;
+using Example.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Example.Core.Controllers;
@@ -10,7 +10,7 @@ namespace Example.Core.Controllers;
 public class UserController(ILogger<UserController> logger, IUserService service) : ControllerBase
 {
     [EndpointSummary("Get user by username")]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDto))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(User))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [HttpGet("{username}")]
     public IActionResult GetUserByUsername(string username)
@@ -22,7 +22,7 @@ public class UserController(ILogger<UserController> logger, IUserService service
         }
         
         var response = service.GetUserByUsername(username);
-
+        
         return response is not null ? Ok(response) : NotFound();
     }
 }

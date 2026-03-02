@@ -1,8 +1,8 @@
-using Example.Core.Dtos;
+using Example.Data.Models;
 
 namespace Example.Core.Services;
 
 public interface IUserService
 {
-    UserDto? GetUserByUsername(string username);
+    User? GetUserByUsername(string username);
 }
