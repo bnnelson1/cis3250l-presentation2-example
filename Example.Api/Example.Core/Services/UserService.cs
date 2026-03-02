@@ -11,7 +11,7 @@ public class UserService(IUserRepository repository) : IUserService
         if (string.IsNullOrWhiteSpace(username)) return null;
         
         var user = repository.GetUserByUsername(username);
-        var dto = user is null ? null : new UserDto(user);
+        var dto = user is not null ? new UserDto(user) : null;
 
         return dto;
     }
