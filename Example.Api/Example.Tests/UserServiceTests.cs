@@ -17,9 +17,10 @@ public class UserServiceTests
         
         var repository = Substitute.For<IUserRepository>();
         repository.GetUserByUsername(username).Returns(user);
-
-        // Act
+        
         var service = new UserService(repository);
+        
+        // Act
         var returnedUser = service.GetUserByUsername(username);
         
         // Assert
