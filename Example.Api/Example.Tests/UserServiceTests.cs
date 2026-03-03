@@ -13,18 +13,18 @@ public class UserServiceTests
     {
         // Arrange
         const string username = "jane_doe";
-        var user = new User { Id = 2, Username = username, Email = "janedoe@proton.me" };
+        var expectedUser = new User { Id = 2, Username = username, Email = "janedoe@proton.me" };
         
-        var repository = Substitute.For<IUserRepository>();
-        repository.GetUserByUsername(username).Returns(user);
+        var database = Substitute.For<IUserRepository>();
+        database.GetUserByUsername(username).Returns(expectedUser);
         
-        var service = new UserService(repository);
+        var service = new UserService(database);
         
         // Act
-        var returnedUser = service.GetUserByUsername(username);
+        var actualUser = service.GetUserByUsername(username);
         
         // Assert
-        returnedUser.ShouldBeEquivalentTo(user);
-        repository.Received().GetUserByUsername(username);  // Included here for completion
+        actualUser.ShouldBeEquivalentTo(expectedUser);
+        database.Received().GetUserByUsername(username);  // Included here for completion
     }
 }
